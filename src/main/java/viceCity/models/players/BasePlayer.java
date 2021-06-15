@@ -2,30 +2,43 @@ package viceCity.models.players;
 
 import viceCity.models.guns.Gun;
 import viceCity.repositories.interfaces.Repository;
+import viceCity.common.ExceptionMessages;
 
 public abstract class BasePlayer implements Player {
-    @Override
-    public String getName() {
-        return null;
-    }
+    private String name;
+    private int lifePoints;
+    private Repository<Gun> gunRepository;
 
-    @Override
-    public int getLifePoints() {
-        return 0;
+    public BasePlayer(String name, int lifePoints) {
+       setName(name);
+       setLifePoints(lifePoints);
     }
 
     @Override
     public boolean isAlive() {
+        if(lifePoints>0){
+            return true;
+        }
         return false;
     }
 
     @Override
-    public Repository<Gun> getGunRepository() {
-        return null;
+    public void takeLifePoints(int points) {
+        this.lifePoints = this.lifePoints - points;
     }
 
-    @Override
-    public void takeLifePoints(int points) {
+    public void setName(String name) {
+        if(name.isEmpty() || name.isBlank()){
+            throw new NullPointerException
+                    (ExceptionMessages.NAME_NULL);
+        }
+        this.name = name;
+    }
 
+    public void setLifePoints(int lifePoints) {
+        if(lifePoints >= 0){
+            this.lifePoints = lifePoints;
+        }
+        throw new IllegalArgumentException(ExceptionMessages.PLAYER_LIFE_POINTS_LESS_THAN_ZERO);
     }
 }
