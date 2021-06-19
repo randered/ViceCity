@@ -56,12 +56,21 @@ public abstract class BaseGun implements Gun {
 
     @Override
     public int fire() {
-        return 0;
+        if(canFire){
+            if(getName().equals("Pistol")){
+                return 1;
+            }else if (getName().equals("Rifle")){
+                return 5;
+            }
+        } return 0;
 
     }
 
     @Override
     public boolean canFire() {
-        return false;
+        if(getBulletsPerBarrel() > 0){
+            return true;
+        }else return getBulletsPerBarrel() > 0 && totalBullets > getBulletsPerBarrel();
+
     }
 }
