@@ -5,25 +5,32 @@ import viceCity.common.ExceptionMessages;
 
 
 public class Pistol extends BaseGun {
-    private int barrel = 5;
-    private int totalBullets = 50;
+    private final static int pistolBarrel = 10;
+    private final static int totalBulletsPistol = 50;
+    private final static int firedBulletsPerShot = 1;
 
     public Pistol(String name) {
-        super(name, 5, 50);
+        super(name, pistolBarrel, totalBulletsPistol);
     }
 
     @Override
     public int fire() {
-        if (barrel == 0) {
-            if (totalBullets > 0){
-            this.barrel = 5;
-            this.totalBullets = this.totalBullets - 5;
-            }
-        }else if(totalBullets <= 0){
-            throw new IllegalArgumentException(ExceptionMessages.TOTAL_BULLETS_LESS_THAN_ZERO);
-        }
-        return 1;
-
         //should fire 1 bullet
+        // should reload
+        if(this.getBulletsPerBarrel() == 0){
+            this.reload();
+            if(this.getBulletsPerBarrel() == 0){
+                return 0;
+            }
+        }
+        this.setBulletsPerBarrel(this.getBulletsPerBarrel() - firedBulletsPerShot);
+        return firedBulletsPerShot;
+    }
+    private void reload(){
+        if(this.getTotalBullets() > 0){
+            int totalBulletsLeft = this.getTotalBullets() - pistolBarrel;
+            this.setTotalBullets(totalBulletsLeft);
+            this.setBulletsPerBarrel(pistolBarrel);
+        }
     }
 }
