@@ -1,13 +1,9 @@
 package viceCity.models.guns;
 
-import viceCity.models.players.BasePlayer;
-import viceCity.common.ExceptionMessages;
-
-
 public class Pistol extends BaseGun {
     private final static int pistolBarrel = 10;
     private final static int totalBulletsPistol = 50;
-    private final static int firedBulletsPerShot = 1;
+    private final static int pistolFiredBullets = 1;
 
     public Pistol(String name) {
         super(name, pistolBarrel, totalBulletsPistol);
@@ -23,8 +19,8 @@ public class Pistol extends BaseGun {
                 return 0;
             }
         }
-        this.setBulletsPerBarrel(this.getBulletsPerBarrel() - firedBulletsPerShot);
-        return firedBulletsPerShot;
+        this.setBulletsPerBarrel(this.getBulletsPerBarrel() - pistolFiredBullets);
+        return pistolFiredBullets;
     }
     private void reload(){
         if(this.getTotalBullets() > 0){

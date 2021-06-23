@@ -1,9 +1,7 @@
 package viceCity.models.neighbourhood;
 
 import viceCity.models.players.Player;
-
 import java.util.Collection;
-
 import viceCity.models.guns.Gun;
 
 public class GangNeighbourhood implements Neighbourhood {

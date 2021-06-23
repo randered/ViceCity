@@ -10,14 +10,4 @@ public class MainPlayer extends BasePlayer {
     public MainPlayer() {
         super(mainPlayerName, mainPlayerLifePoints);
     }
-
-    @Override
-    public String getName() {
-        return MainPlayer.this.getName();
-    }
-
-    @Override
-    public Repository<Gun> getGunRepository() {
-        return null;
-    }
 }

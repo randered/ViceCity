@@ -1,6 +1,7 @@
 package viceCity.models.players;
 
 import viceCity.models.guns.Gun;
+import viceCity.repositories.interfaces.GunRepository;
 import viceCity.repositories.interfaces.Repository;
 import viceCity.common.ExceptionMessages;
 
@@ -13,6 +14,7 @@ public abstract class BasePlayer implements Player {
     public BasePlayer(String name, int lifePoints) {
         this.setName(name);
         setLifePoints(lifePoints);
+        this.gunRepository = new GunRepository();
 
     }
 
@@ -32,7 +34,7 @@ public abstract class BasePlayer implements Player {
     public void setName(String name) {
         if (name == null || name.isEmpty()) {
             throw new NullPointerException
-                    (ExceptionMessages.NAME_NULL);
+                    (ExceptionMessages.PLAYER_NULL_USERNAME);
         }
         this.name = name;
     }
@@ -56,6 +58,6 @@ public abstract class BasePlayer implements Player {
 
     @Override
     public Repository<Gun> getGunRepository() {
-        return null;
+        return this.gunRepository;
     }
 }
