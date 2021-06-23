@@ -1,25 +1,46 @@
 package viceCity.repositories.interfaces;
 
+import viceCity.models.guns.Gun;
+
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
-public class GunRepository implements Repository{
-    @Override
-    public Collection getModels() {
-        return null;
+public class GunRepository implements
+        viceCity.repositories.interfaces.Repository
+                <viceCity.models.guns.Gun> {
+
+    private Map<String, Gun> models;
+
+    public GunRepository() {
+        this.models = new HashMap<>();
     }
 
     @Override
-    public void add(Object model) {
-
+    public Collection<Gun> getModels() {
+        return Collections.unmodifiableCollection(this.models.values());
     }
 
     @Override
-    public boolean remove(Object model) {
-        return false;
+    public void add(Gun model) {
+        if (!models.containsKey(model)) {
+            this.models.put(model.getName(), model);
+        }
     }
 
     @Override
-    public Object find(String name) {
-        return null;
+    public boolean remove(Gun model) {
+        Gun removeGun = models.get(model.getName());
+        boolean removed = true;
+        if (removeGun == null) {
+            removed = false;
+        }
+        return removed;
+    }
+
+    @Override
+    public Gun find(String name) {
+        return this.models.get(name);
     }
 }

@@ -17,11 +17,6 @@ public class MainPlayer extends BasePlayer {
     }
 
     @Override
-    public int getLifePoints() {
-        return MainPlayer.this.getLifePoints();
-    }
-
-    @Override
     public Repository<Gun> getGunRepository() {
         return null;
     }

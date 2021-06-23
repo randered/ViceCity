@@ -19,6 +19,22 @@ public class GangNeighbourhood implements Neighbourhood {
                 }
             }
         }
+        for (Player civilPlayer : civilPlayers) {
+            if(!civilPlayer.isAlive()){
+                continue;
+            }
+            for (Gun gunModel: civilPlayer.getGunRepository().getModels()) {
+                if(mainPlayer.isAlive() && gunModel.canFire()){
+                    mainPlayer.takeLifePoints(gunModel.fire());
+                }
+                if (!mainPlayer.isAlive()){
+                    break;
+                }
+            }
+            if (!mainPlayer.isAlive()){
+                break;
+            }
+        }
 
     }
 }
